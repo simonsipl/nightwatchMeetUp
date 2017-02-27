@@ -15,20 +15,32 @@ Make sure you have `node` package installed - at least v4.
 2. Install required packages
     ```sh
     $ cd my-project
-    $ npm install 
+    $ npm install  # or yarn install 
     ```
 
     (Under the hood, all required packages are installed and after that a script is run to install selenium and chromedriver binaries)
 
-3. You're ready to run!
+You're ready to run!
+
+
+## Running tests
+
+- Native tests
+
     ```sh
-    $ npm run test
+    $ npm run test  # or yarn test
+    ```
+
+- Cucumber (BDD) tests
+
+    ```sh
+    $ npm run bdd  # or yarn bdd
     ```
 
 
 ## Directories 	
  - `features` - Gherkin tests and steps
- - `test` - spec files for 'native' nightwatch tests
+ - `test` - spec files for native nightwatch tests
  - `pages` - _page objects_ used in tests
 
 

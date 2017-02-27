@@ -11,7 +11,9 @@
     "selenium-download": "^2.0.7"
   },
   "scripts": {
+    "start": "echo '*\n* no \"start\" command.\n* run \"test\" or \"bdd\" commands!\n*'",
     "test": "nightwatch",
+    "bdd": "RUN_BDD=1 nightwatch",
     "ci:test": "nightwatch -e jenkins-chrome",
     "postinstall": "node ./bin/install-selenium.js"
   },

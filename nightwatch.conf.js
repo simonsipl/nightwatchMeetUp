@@ -1,15 +1,17 @@
-var BINPATH = './node_modules/nightwatch/bin/';
-//comment if you want to run native Nightwatch
- require('nightwatch-cucumber')({
-   nightwatchClientAsParameter: true,
-   /* other configuration options */
- })
+const BINPATH = './node_modules/nightwatch/bin/';
+const RUN_BDD = process.env.RUN_BDD;
+
+// Basically, this single require clause defines if we run native or BDD tests
+if (RUN_BDD) {
+  require('nightwatch-cucumber')({
+    nightwatchClientAsParameter: true
+  });
+}
+
 
 module.exports = {
-  "src_folders": [
-    //"test"// Where you are storing your Native Nightwatch e2e tests
-  ],
-  "page_objects_path": "pages/",
+  "src_folders": RUN_BDD ? [] : ['./test'], // Where you are storing your native Nightwatch e2e tests
+  "page_objects_path": "./pages",
   "output_folder": "./reports", // reports (test outcome) output by nightwatch
 
   "selenium": { // downloaded by selenium-download module (see readme)
@@ -23,6 +25,8 @@ module.exports = {
   },
 
   "test_settings": {
+
+    // default browser options
     "default": {
       "screenshots": {
         "enabled": true, // if you want to keep screenshots
@@ -35,12 +39,8 @@ module.exports = {
         "browserName": "chrome"
       }
     },
-    "chrome": {
-      "desiredCapabilities": {
-        "browserName": "chrome",
-        "javascriptEnabled": true // turn off to test progressive enhancement
-      }
-    },
+
+    // jenkins browsers
     "jenkins-chrome": {
       "selenium_host": "selenium_hub",
       "desiredCapabilities": {
@@ -58,4 +58,4 @@ module.exports = {
       }
     }
   }
-}
+};

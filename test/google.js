@@ -1,15 +1,18 @@
-//Using nightwatch with pageObject Model
+// Using nightwatch with vanilla features (no Page Object)
 
 module.exports = {
-  'Test': function (client) {
-    var google = client.page.google();
+  'Google: vanilla test': function (browser) {
+    browser
+      .url('http://www.google.com')
+      .waitForElementVisible('body', 4000)
+      .setValue('input[type=text]', 'nightwatch')
+      .waitForElementVisible('button[name=btnG]')
+      .click('button[name=btnG]')
 
-    google.navigate()
-      .assert.title('Google')
-      .assert.visible('@searchBar')
-      .setValue('@searchBar', 'nightwatch')
-      .click('@submit');
+      // let's wait for the list with results!
+      .waitForElementVisible('#res .g:first-child h3.r', 5000)
 
-    client.end();
-  }
+      .assert.containsText('#main', 'Nightwatch')
+      .end();
+  },
 };
